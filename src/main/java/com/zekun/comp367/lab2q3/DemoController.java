@@ -8,6 +8,6 @@ public class DemoController {
     // add code for the "/hello" endpoint
     @GetMapping("/")
     public String sayHello() {
-        return "Welcome to COMP367";
+        return "Good morning, Zekun Zhang, Welcome to COMP367";
     }
 }

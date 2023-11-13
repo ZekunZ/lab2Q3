@@ -22,7 +22,6 @@ pipeline {
             	sh "docker login -u zekunz -p ${DOCKERHUB_PWD}"
                 sh 'docker push zekunz/lab2q3:1.0'
             }
-          }
         }
     }
 }

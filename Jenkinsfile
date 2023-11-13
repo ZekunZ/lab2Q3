@@ -7,6 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/ZekunZ/lab2Q3.git']])
+                sh './mvnw -B -DskipTests clean package'
             }
         }
         stage('Docker Build') {
@@ -15,10 +16,15 @@ pipeline {
           	    sh 'docker build -t zekunz/lab2q3:1.0 .'
             }
         }
+        stage('Docker Login') {
+            agent any
+            steps {
+                sh "docker login -u zekunz -p ${DOCKERHUB_PWD}"
+                }
+            }
         stage('Docker Push') {
         	agent any
             steps {
-            	sh "docker login -u zekunz -p ${DOCKERHUB_PWD}"
                 sh 'docker push zekunz/lab2q3:1.0'
             }
         }
